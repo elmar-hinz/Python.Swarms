@@ -7,6 +7,7 @@ from time import sleep
 from moskito_game import MoskitoGame
 
 amount = 40
+speed = 6
 
 class Application:
     def __init__(self, screen, logger):
@@ -35,7 +36,7 @@ class Controller:
             if self.app.screen.getch() == ord('q'): break
             self.app.model.step()
             self.app.view.draw()
-            sleep(0.08)
+            sleep(1.0/speed)
 
 class Model:
     def __init__(self, app):
