@@ -5,8 +5,8 @@ import logger
 from logger import log
 from time import sleep
 
-amount = 40
-speed = 6
+amount = 80
+speed = 8
 game = "BirdGame"
 
 class Application:

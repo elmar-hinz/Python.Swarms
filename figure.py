@@ -3,9 +3,16 @@
 from logger import log
 
 class Figure():
-    strategy = None
     color = 0
-    symbol = "*"
+
+    @property
+    def symbol(self):
+        try: return self.strategy.symbol
+        except: return "*"
+
+    def bindStrategy(self, strategy):
+        strategy.figure = self
+        self.strategy = strategy
 
     def __init__(self, board):
         self.board = board
@@ -13,21 +20,16 @@ class Figure():
     def add(self, y, x):
         self.board.add(self, y, x)
 
-    def injectStrategy(self, strategy):
-        strategy.setup(self)
-        self.strategy = strategy
-
     def position(self):
-        return self.board.getPostion(self)
+        return self.board.position(self)
 
     def move(self, y, x, relative = False):
         self.board.move(self, y, x, relative = relative)
 
 
 class FigureStrategy():
-    def setup(self, figure):
-        self.figure = figure
-
     @property
     def board(self):
         return self.figure.board
+
+
