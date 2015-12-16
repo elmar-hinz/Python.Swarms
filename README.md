@@ -1,6 +1,10 @@
 # Python.Swarms
 Swarm simulation
 
+```
+./app.py
+```
+
 Framework to create differnt swarms by writing classes of swarm behaviour strategies.
 
 The strategy can either result from the behaviour of the single figures (like ants, bees or robots) 
