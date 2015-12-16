@@ -4,7 +4,7 @@ import curses
 import logger
 from logger import log
 from time import sleep
-from game import Game
+from moskito_game import MoskitoGame
 
 amount = 40
 
@@ -41,7 +41,7 @@ class Model:
     def __init__(self, app):
         self.app = app
         height, width = self.app.view.canvas.getmaxyx()
-        self.game = Game(height - 2, width - 2, amount)
+        self.game = MoskitoGame(height - 2, width - 2, amount)
         self.game.setup()
 
     def step(self):
@@ -66,8 +66,8 @@ class View:
 
     def drawGame(self):
         board = self.game.board
-        for y in range(self.game.height):
-            for x in range(self.game.width):
+        for y in range(board.height):
+            for x in range(board.width):
                 self.canvas.addstr(y + 1, x + 1, board.symbol(y,x),
                         curses.color_pair(board.color(y,x)))
         self.canvas.refresh()
