@@ -9,6 +9,10 @@ class Board():
     class AboveHeightException(Exception): pass
     class BelowHeightException(Exception): pass
 
+    @property
+    def figures(self):
+        return self.positions.keys()
+
     def __init__(self, height, width):
         self.width = width
         self.height = height
@@ -46,9 +50,6 @@ class Board():
 
     def figure(self, y, x):
         return self.cells[y][x]
-
-    def figures(self):
-        return self.positions.keys()
 
     def move(self, figure, y, x, relative = False):
         oldY, oldX = self.positions[figure]

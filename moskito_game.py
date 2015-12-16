@@ -3,7 +3,7 @@
 from random import random, sample, randint
 from game import BoardGame
 from board import Board
-from figure import Figure
+from figure import Figure, FigureStrategy
 
 class MoskitoGame(BoardGame):
     def __init__(self, height, width, amount):
@@ -13,15 +13,11 @@ class MoskitoGame(BoardGame):
     def setup(self):
         for n in range(self.amount):
             figure = Figure(self.board)
-            figure.strategy = MoskitoFigure(figure)
-        self.board.figures()[0].color = 1
+            figure.injectStrategy(MoskitoStrategy())
+            figure.strategy.placeIt()
+        self.board.figures[0].color = 1
 
-class MoskitoFigure:
-    def __init__(self, figure):
-        self.figure = figure
-        self.board = figure.board
-        self.placeIt()
-
+class MoskitoStrategy(FigureStrategy):
     def modify(self):
         self.deltaX = randint(-2, 2)
         self.deltaY = randint(-2, 2)
@@ -43,8 +39,8 @@ class MoskitoFigure:
             self.deltaY = -self.deltaY
 
     def placeIt(self):
-        x = sample(range(0, self.figure.board.width), 1)[0]
-        y = sample(range(0, self.figure.board.height), 1)[0]
+        x = sample(range(0, self.board.width), 1)[0]
+        y = sample(range(0, self.board.height), 1)[0]
         self.modify()
         try:
             self.figure.add(y, x)

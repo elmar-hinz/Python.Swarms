@@ -13,8 +13,9 @@ class Figure():
     def add(self, y, x):
         self.board.add(self, y, x)
 
-    def step(self):
-        self.strategy.step()
+    def injectStrategy(self, strategy):
+        strategy.setup(self)
+        self.strategy = strategy
 
     def position(self):
         return self.board.getPostion(self)
@@ -23,3 +24,10 @@ class Figure():
         self.board.move(self, y, x, relative = relative)
 
 
+class FigureStrategy():
+    def setup(self, figure):
+        self.figure = figure
+
+    @property
+    def board(self):
+        return self.figure.board

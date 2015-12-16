@@ -4,10 +4,10 @@ import curses
 import logger
 from logger import log
 from time import sleep
-from moskito_game import MoskitoGame
 
 amount = 40
 speed = 6
+game = "BirdGame"
 
 class Application:
     def __init__(self, screen, logger):
@@ -42,7 +42,12 @@ class Model:
     def __init__(self, app):
         self.app = app
         height, width = self.app.view.canvas.getmaxyx()
-        self.game = MoskitoGame(height - 2, width - 2, amount)
+        if game == "MoskitoGame":
+            from moskito_game import MoskitoGame
+            self.game = MoskitoGame(height - 2, width - 2, amount)
+        elif game == "BirdGame":
+            from bird_game import BirdGame
+            self.game = BirdGame(height - 2, width - 2, amount)
         self.game.setup()
 
     def step(self):

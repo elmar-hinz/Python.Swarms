@@ -13,4 +13,6 @@ class BoardGame(Game):
         self.board = Board(height, width)
 
     def step(self):
-        for figure in self.board.figures(): figure.step()
+        for figure in self.board.figures:
+            figure.strategy.step()
+
