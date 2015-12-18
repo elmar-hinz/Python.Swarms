@@ -4,6 +4,7 @@ from random import random, sample, randint
 from game import BoardGame
 from board import Board
 from figure import Figure, FigureStrategy
+from logger import log
 
 class MoskitoGame(BoardGame):
     def __init__(self, height, width, amount):
@@ -13,9 +14,12 @@ class MoskitoGame(BoardGame):
     def setup(self):
         for n in range(self.amount):
             figure = Figure(self.board)
-            figure.bindStrategy(MoskitoStrategy())
+            figure.bindStrategy(self.figureStrategyFactory())
             figure.strategy.placeIt()
         self.board.figures[0].color = 1
+
+    def figureStrategyFactory(self):
+        return MoskitoStrategy()
 
 class MoskitoStrategy(FigureStrategy):
     symbol = "."
